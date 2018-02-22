@@ -19,19 +19,9 @@ func _ready():
 	perm_texture.storage = ImageTexture.STORAGE_RAW
 	
 	var perm_image = Image.new()
-
-	var data = PoolByteArray()
-	var index_list = range(256)
-	for i in range(index_list.size()):
-		var x = randi() % index_list.size()
-		data.append_array([x,x,x,255])
-		index_list.remove(x)
-	data.append_array(data)
-	data.append_array(data)
-	perm_image.create_from_data(32, 32, false, Image.FORMAT_RGBA8, data)
-
+	perm_image.create(32, 32, false, Image.FORMAT_RGBA8)
 	perm_texture.create_from_image(perm_image)
 
-	sprite.material.shader.set_default_texture_param("p", perm_texture)
+	sprite.material.shader.set_default_texture_param("perm", perm_texture)
 
 	self.add_child(sprite)
